@@ -1,0 +1,11 @@
+<h1>Ski Resorts Page</h1>
+<ul>
+<% skiresorts.forEach(function(skiresort){ %>
+   <div>
+      <%= skiresort.name %>
+   </div>
+   <div>
+      <img src='<%= skiresort.image %>'>
+   </div>
+<% }) %>
+</ul>
