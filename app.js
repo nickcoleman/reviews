@@ -5,6 +5,13 @@ var   express     = require("express"),
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
+var skiresorts = [
+   {name: 'Deer Valley', image: 'https://farm3.staticflickr.com/2215/2180936615_6601d11bc1.jpg'},
+   {name: 'Park City Mountain', image: 'https://farm3.staticflickr.com/2335/2180937479_b57ef35dce.jpg'},
+   {name: 'Alta', image: 'https://farm3.staticflickr.com/2304/2181723762_4bc421c547.jpg'}
+];
+   
+
 // ======== ROUTES =============   
 app.get("/", function(req, res){
    res.render("landing");
@@ -12,25 +19,23 @@ app.get("/", function(req, res){
 
 // Ski Resort Routes
 app.get('/skiresorts', function(req, res){
-   var skiresorts = [
-      {name: 'Deer Valley', image: 'https://farm3.staticflickr.com/2215/2180936615_6601d11bc1.jpg'},
-      {name: 'Park City Mountain', image: 'https://farm3.staticflickr.com/2335/2180937479_b57ef35dce.jpg'},
-      {name: 'Alta', image: 'https://farm3.staticflickr.com/2304/2181723762_4bc421c547.jpg'}
-   ]
-   
    res.render('skiresorts', {skiresorts: skiresorts});
-   
 });
 
 app.post('/skiresorts', function(req, res){
-   res.send('Ski Resort Post Route');
-   // get ski resort data from form
-   // add to ski resorts data repository
-   // redirect back to skiresorts page
+
+   var name = req.body.name;
+   var image = req.body.image;
+   var newSkiresort = {name: name, image: image};
+
+   skiresorts.push(newSkiresort);
+   
+   res.redirect('/skiresorts');
 });
 
+
 app.get('/skiresorts/new', function(req, res){
-   res.send('New Ski Resort');
+   res.render('new');
 });
    
 

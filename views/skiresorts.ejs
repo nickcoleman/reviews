@@ -1,6 +1,8 @@
 <% include ./partials/header %>
 <h1>Ski Resorts Page</h1>
-<ul>
+
+<a href='./skiresorts/new'>Add New Ski Resort</a>
+
 <% skiresorts.forEach(function(skiresort){ %>
    <div>
       <%= skiresort.name %>
@@ -9,5 +11,5 @@
       <img src='<%= skiresort.image %>'>
    </div>
 <% }) %>
-</ul>
+
 <% include ./partials/footer %>
