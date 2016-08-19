@@ -11,12 +11,8 @@ v1:
    * Create header & footer partials
    * Link to Bootstrap
 
-# New Ski Resort creation
+# Create New Campground
    * Set up new Ski Resort post route
    * Add body-parser
    * Add show Ski Resort form
    * Add route to form
-
-# Style Ski Resorts page
-   * Better header/title
-   * Display resorts in a grid

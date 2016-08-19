@@ -1,15 +1,26 @@
 <% include ./partials/header %>
-<h1>Ski Resorts Page</h1>
+<div class='container'>
+   <header class='jumbotron'>
+      <div class='container'>
+         <h1>Utah Ski Resorts Review</h1> 
+         <p class='tagline'>Reviews of Utah's ski resorts ... home of the best snow on earth</p>
+         <p><a class='btn btn-large btn-info' href='./skiresorts/new'>Add New Ski Resort</a></p>
+      </div>
+   </header>
 
-<a href='./skiresorts/new'>Add New Ski Resort</a>
+      <div class='row' style='display: flex; flex-wrap: wrap;'>
+         <% skiresorts.forEach(function(skiresort){ %>
+            <div class="col-md-3 col-sm-6">
+               <div class='thumbnail'>
+                  <img src='<%= skiresort.image %>'>
+                  <div class='content text-center'>
+                     <h4><%= skiresort.name %></h4>
+                  </div>
+                  
+               </div>
+            </div>
+         <% }) %>         
+      </div>
 
-<% skiresorts.forEach(function(skiresort){ %>
-   <div>
-      <%= skiresort.name %>
-   </div>
-   <div>
-      <img src='<%= skiresort.image %>'>
-   </div>
-<% }) %>
-
+</div>
 <% include ./partials/footer %>
