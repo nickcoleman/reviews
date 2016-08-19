@@ -1,0 +1,36 @@
+{
+  "name": "reviews",
+  "version": "1.0.0",
+  "description": "Reviews website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickcoleman/reviews.git"
+  },
+  "keywords": [
+    "reviews"
+  ],
+  "author": "Nick Coleman, http://www.ITProjMgt.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickcoleman/reviews/issues"
+  },
+  "homepage": "https://github.com/nickcoleman/reviews#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.4.2",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.5.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {}
+}
