@@ -1,5 +1,6 @@
 <% include ./partials/header %>
 <div class='container'>
+   
    <header class='jumbotron'>
       <div class='container'>
          <h1>Utah Ski Resorts Review</h1> 
@@ -8,19 +9,19 @@
       </div>
    </header>
 
-      <div class='row' style='display: flex; flex-wrap: wrap;'>
-         <% skiresorts.forEach(function(skiresort){ %>
-            <div class="col-md-3 col-sm-6">
-               <div class='thumbnail'>
-                  <img src='<%= skiresort.image %>'>
-                  <div class='content text-center'>
-                     <h4><%= skiresort.name %></h4>
-                  </div>
-                  
+   <div class='row' style='display: flex; flex-wrap: wrap;'>
+      <% skiresorts.forEach(function(skiresort){ %>
+         <div class="col-md-3 col-sm-6">
+            <div class='thumbnail'>
+               <img src='<%= skiresort.image %>'>
+               <div class='content text-center'>
+                  <h4><%= skiresort.name %></h4>
                </div>
+               
             </div>
-         <% }) %>         
-      </div>
+         </div>
+      <% }) %>         
+   </div>
 
 </div>
 <% include ./partials/footer %>

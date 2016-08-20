@@ -16,3 +16,7 @@ v1:
    * Add body-parser
    * Add show Ski Resort form
    * Add route to form
+
+# Style Navbar & form
+   * Add navbar to all pages
+   * Style new campground form
