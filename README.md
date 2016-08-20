@@ -20,3 +20,9 @@ v1:
 # Style Navbar & form
    * Add navbar to all pages
    * Style new campground form
+
+v2
+# Add Mongoose
+   * Install and configure mongoose
+   * Setup skiresorts model
+   * Use skiresorts mondel inside our routes
