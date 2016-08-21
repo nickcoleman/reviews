@@ -65,8 +65,8 @@ app.post('/skiresorts', function(req, res){
 
    var name = req.body.name;
    var image = req.body.image;
-   var description = req.body.description;
-   var newSkiresort = {name: name, image: image, description: description};
+   var desc = req.body.description;
+   var newSkiresort = {name: name, image: image, description: desc};
 
    SkiResort.create(newSkiresort, function(err, newSkiresort){
       if (err) {
@@ -93,6 +93,7 @@ app.get('/skiresorts/:id', function(req, res){
 
 // Edit SkiResort
 app.get('skiresorts/:id/edit', function(req, res){
+   SkiResort.findByIdAndUpdate
    res.send('Edit a specific Ski Resort');
 });
 

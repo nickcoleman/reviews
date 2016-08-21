@@ -30,3 +30,10 @@ v2
 # Show Page
    * Add 'description' to skiresort model
    * Add a show route/template
+
+v3
+# Refactor Mongoose Code
+   * Create Models directory
+   * Use module.exports
+   * Require everything correctly
+
