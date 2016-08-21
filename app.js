@@ -49,12 +49,12 @@ app.get("/", function(req, res){
 
 // Ski Resort Routes
 // Index SkiResort
-app.get('/skiresorts/index', function(req, res){
+app.get('/skiresorts', function(req, res){
    SkiResort.find({}, function(err, skiresorts){
       if (err) {
          console.error(err);
       } else {
-         res.render('skiresorts/index', {skiresorts: skiresorts});
+         res.render('index', {skiresorts: skiresorts});
       }
    });
    
@@ -62,7 +62,7 @@ app.get('/skiresorts/index', function(req, res){
 
 // New Ski Resort
 app.get('/skiresorts/new', function(req, res){
-   res.render('skiresorts/new');
+   res.render('new');
 });
 
 // Create SkiResort
@@ -70,7 +70,8 @@ app.post('/skiresorts', function(req, res){
 
    var name = req.body.name;
    var image = req.body.image;
-   var newSkiresort = {name: name, image: image};
+   var description = req.body.description;
+   var newSkiresort = {name: name, image: image, description: description};
 
    SkiResort.create(newSkiresort, function(err, newSkiresort){
       if (err) {
@@ -90,15 +91,15 @@ app.get('/skiresorts/:id', function(req, res){
          console.log(err);
          return;
       }
-      res.render('skiresorts/show', {skiresort: foundSkiresort});
-   })
+      res.render('show', {skiresort: foundSkiresort});
+   });
 });
 
 
 // Edit SkiResort
 app.get('skiresorts/:id/edit', function(req, res){
    res.send('Edit a specific Ski Resort');
-})
+});
 
 
 // Update SkiResort

@@ -1,0 +1,20 @@
+<% include ./partials/header %>
+
+<div class='container'>
+   <h1 class='text-center'><%= skiresort.name %></h1>
+   
+   <div class="col-sm-12">
+      <div class='thumbnail'>
+         <img src='<%= skiresort.image %>'>
+         <div class='content text-center'>
+            <h4></h4>
+         </div>
+         <div class='description'>
+            <p><%= skiresort.description %></p>
+         </div>
+      </div>
+   </div>
+   <a href='/skiresorts'>Go Back</a> 
+</div>
+
+<% include ./partials/footer %>
