@@ -1,9 +1,9 @@
-<% include ./partials/header %>
+<% include ../partials/header %>
 <div class='container'>
    <div class='row'>
       <h1 class='text-center'>Create new ski resort</h1>
       <div style='width: 30%; margin: 30px auto;'>
-         <form action='/skiresorts' method='POST'>
+         <form action='/skiresorts/index' method='POST'>
             <div class='form-group'>
                <input class='form-control' type='text' name='name' placeholder='Ski Resort Description'/>
             </div>
@@ -14,9 +14,9 @@
                <button class='btn btn-lg btn-info btn-block' type='submit'>Submit</button>
             </div>
          </form>         
-         <a href='/skiresorts'>Go Back</a>  
+         <a href='/skiresorts/index'>Go Back</a>  
       </div>
    </div>
 </div>
 
-<% include ./partials/footer %>
+<% include ../partials/footer %>

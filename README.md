@@ -26,3 +26,7 @@ v2
    * Install and configure mongoose
    * Setup skiresorts model
    * Use skiresorts mondel inside our routes
+
+# Show Page
+   * Add 'description' to skiresort model
+   * Add a show route/template

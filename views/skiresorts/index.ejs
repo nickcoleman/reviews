@@ -1,11 +1,11 @@
-<% include ./partials/header %>
+<% include ../partials/header %>
 <div class='container'>
    
    <header class='jumbotron'>
       <div class='container'>
          <h1>Utah Ski Resorts Review</h1> 
          <p class='tagline'>Reviews of Utah's ski resorts ... home of the best snow on earth</p>
-         <p><a class='btn btn-large btn-info' href='./skiresorts/new'>Add New Ski Resort</a></p>
+         <p><a class='btn btn-large btn-info' href='./new'>Add New Ski Resort</a></p>
       </div>
    </header>
 
@@ -17,11 +17,13 @@
                <div class='content text-center'>
                   <h4><%= skiresort.name %></h4>
                </div>
-               
+               <p class='text-center'>
+                  <a class='btn btn-info btn-large' href='<%= skiresort._id %>'>More Info</a>
+               </p>
             </div>
          </div>
       <% }) %>         
    </div>
 
 </div>
-<% include ./partials/footer %>
+<% include ../partials/footer %>
