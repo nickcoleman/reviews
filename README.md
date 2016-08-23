@@ -33,7 +33,10 @@ v2
 
 v3
 # Refactor Mongoose Code
-   * Create Models directory
-   * Use module.exports
-   * Require everything correctly
+   * Create models directory
+   * Move Schemas to model files
+   * Refactor to require model files
 
+# Create Seeds files
+   * Add seeds.js
+   * Run seeds.js when server starts

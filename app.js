@@ -4,8 +4,15 @@ var   express     = require("express"),
       mongoose    = require('mongoose');
 
 // Models
-var   SkiResort   = require('./models/skiresorts.js'),
-      Comments    = require('./models/comments.js');
+var   SkiResort   = require('./models/skiresorts'),
+      Comment     = require('./models/comments'),
+      User        = require("./models/user");
+
+// Seed Database
+var SeedDB = require("./seeds");
+SeedDB();
+
+// Routes
 
 
 // Setup
@@ -14,12 +21,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 
+
 // ======== ROUTES =============   
 app.get("/", function(req, res){
    res.render("landing");
 });
 
-// Ski Resort Routes
+// ============ Ski Resort Routes ================
 // Index SkiResort
 app.get('/skiresorts', function(req, res){
    SkiResort.find({}, function(err, skiresorts){
@@ -85,6 +93,8 @@ app.put('skiresorts/:id', function(req, res){
 app.delete('skiresorts/:id', function(req, res){
    res.send('Delete a specific Ski Resort');
 });
+
+// ========== Comment Routes ==================
 
 // ===== Server Setup ==============
 app.listen(process.env.PORT, process.env.IP, function(){
