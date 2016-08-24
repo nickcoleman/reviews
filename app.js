@@ -28,7 +28,10 @@ app.get("/", function(req, res){
    res.redirect('/skiresorts');
 });
 
+// ===============================================
 // ============ Ski Resort Routes ================
+// ===============================================
+
 // Index SkiResort
 app.get('/skiresorts', function(req, res){
    SkiResort.find({}, function(err, skiresorts){
@@ -94,11 +97,45 @@ app.delete('skiresorts/:id', function(req, res){
    res.send('Delete a specific Ski Resort');
 });
 
+// ============================================
 // ========== Comment Routes ==================
+// ============================================
 
 app.get('/skiresorts/:id/comments/new', function(req, res){
-   res.render('comments/new');
+   SkiResort.findById(req.params.id, function(err, skiresort){
+      if (err) {
+         console.log(err);
+         return;
+      }
+      res.render('comments/new', {skiresort: skiresort});
+   });
 });
+
+app.post('/skiresorts/:id/comments', function(req, res){
+   var path = '/skiresorts/' + req.params.id;
+   SkiResort.findById(req.params.id, function(err, resort){
+      if(err) {
+         console.log(err);
+         res.redirect(path);
+      }
+      
+      Comment.create(req.body.comment, function(err, newComment){
+         if (err) {
+            console.log(err);
+            res.redirect(path);
+         }
+         
+         resort.comments.push(newComment);
+         resort.save();
+         console.log(resort);
+         res.redirect(path);
+         
+      });
+   });
+});
+   
+   
+   
 
 
 // ===== Server Setup ==============
