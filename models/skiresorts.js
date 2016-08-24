@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-// var Comment =  require("./comments");
 
 var skiresortSchema = new mongoose.Schema({
    name: String,

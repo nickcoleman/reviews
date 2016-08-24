@@ -11,7 +11,7 @@ var seedResort = [
 
 var seedComment = {
    text: 'This is a greate ski resort ... but, they need to groom the slopes a bit more often',
-   authoer: 'John Jones'
+   author: 'John Jones'
 };
 
 function SeedDB() {

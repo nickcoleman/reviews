@@ -66,7 +66,7 @@ app.post('/skiresorts', function(req, res){
 // Show SkiResort
 app.get('/skiresorts/:id', function(req, res){
    var id = req.params.id;
-   SkiResort.findById(id, function(err, foundSkiresort){
+   SkiResort.findById(id).populate('comments').exec(function(err, foundSkiresort){
       if (err) {
          console.log(err);
          return;
