@@ -10,9 +10,9 @@ var   SkiResort   = require('./models/skiresorts'),
 
 // Seed Database
 var SeedDB = require("./seeds");
-SeedDB();
+// SeedDB();
 
-// Routes
+// Routing
 
 
 // Setup
@@ -24,7 +24,8 @@ app.set("view engine", "ejs");
 
 // ======== ROUTES =============   
 app.get("/", function(req, res){
-   res.render("landing");
+   // res.render("landing");
+   res.redirect('/skiresorts');
 });
 
 // ============ Ski Resort Routes ================
@@ -34,7 +35,7 @@ app.get('/skiresorts', function(req, res){
       if (err) {
          console.error(err);
       } else {
-         res.render('index', {skiresorts: skiresorts});
+         res.render('skiresorts/index', {skiresorts: skiresorts});
       }
    });
    
@@ -42,7 +43,7 @@ app.get('/skiresorts', function(req, res){
 
 // New Ski Resort
 app.get('/skiresorts/new', function(req, res){
-   res.render('new');
+   res.render('skiresorts/new');
 });
 
 // Create SkiResort
@@ -71,14 +72,13 @@ app.get('/skiresorts/:id', function(req, res){
          console.log(err);
          return;
       }
-      res.render('show', {skiresort: foundSkiresort});
+      res.render('skiresorts/show', {skiresort: foundSkiresort});
    });
 });
 
 
 // Edit SkiResort
 app.get('skiresorts/:id/edit', function(req, res){
-   SkiResort.findByIdAndUpdate
    res.send('Edit a specific Ski Resort');
 });
 
@@ -95,6 +95,11 @@ app.delete('skiresorts/:id', function(req, res){
 });
 
 // ========== Comment Routes ==================
+
+app.get('/skiresorts/:id/comments/new', function(req, res){
+   res.render('comments/new');
+});
+
 
 // ===== Server Setup ==============
 app.listen(process.env.PORT, process.env.IP, function(){

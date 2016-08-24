@@ -1,6 +1,6 @@
 # reviews
 
-v1:
+
 # Create landing page
 # Create skiresort page that lists each ski resort
 # skiresorts have:
@@ -21,7 +21,6 @@ v1:
    * Add navbar to all pages
    * Style new campground form
 
-v2
 # Add Mongoose
    * Install and configure mongoose
    * Setup skiresorts model
@@ -31,12 +30,7 @@ v2
    * Add 'description' to skiresort model
    * Add a show route/template
 
-v3
-# Refactor Mongoose Code
-   * Create models directory
-   * Move Schemas to model files
-   * Refactor to require model files
-
-# Create Seeds files
-   * Add seeds.js
-   * Run seeds.js when server starts
+# Comment New/Create
+   * Setup nested routes
+   * Add comment new & create routes
+   * Add new comment form
