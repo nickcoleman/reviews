@@ -33,4 +33,8 @@
 # Comment New/Create
    * Setup nested routes
    * Add comment new & create routes
-   * Add new comment form
+   * Add new comment forma
+
+# Style Ski Resort Show Page
+   * Add sidebar
+   * Reformat comments

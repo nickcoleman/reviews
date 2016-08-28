@@ -19,8 +19,8 @@ var SeedDB = require("./seeds");
 mongoose.connect("mongodb://localhost/reviews");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
-
+app.use(express.static(__dirname + "/public"));
+// app.use(express.static('./public'));
 
 // ======== ROUTES =============   
 app.get("/", function(req, res){
@@ -126,8 +126,7 @@ app.post('/skiresorts/:id/comments', function(req, res){
          }
          
          resort.comments.push(newComment);
-         resort.save();
-         console.log(resort);
+         resort.save();;
          res.redirect(path);
          
       });

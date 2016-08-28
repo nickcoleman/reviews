@@ -1,31 +1,52 @@
 <% include ../partials/header %>
 
 <div class='container'>
-   <h1 class='text-center'><%= skiresort.name %></h1>
-   
-   <div class="col-sm-12">
-      <div class='thumbnail'>
-         <img src='<%= skiresort.image %>'>
-         <div class='content text-center'>
-            <h4></h4>
+   <div class='row'>
+      <div class='col-md-3'>
+         <p class='lead text-center'>Utah Reviews</p>
+         <div class='list-group'>
+            <li class='list-group-item active'>Ski Resorts</li>
+            <li class='list-group-item'>Restaurants</li>
+            <li class='list-group-item'>Shopping</li>
          </div>
-         <div class='description'>
-            <p><%= skiresort.description %></p>
+      </div>
+      <div class='col-md-9'>
+         <div class='thumbnail'>
+            <img class='img-responsive' src='<%= skiresort.image %>'>
+            <div class='caption-full'>
+               <h4 class='pull-right'>Rate: $9.00/night</h4>
+               <h4><a href=''><%= skiresort.name %></a></h1>   
+               <p><%= skiresort.description %></p>
+           </div>
          </div>
-         <a class='btn btn-info btn-large' href='/skiresorts/<%= skiresort._id %>/comments/new'>Post a comment</a>
+         <div class='well'>
+            <div class='text-right'>
+               <a class='btn btn-info btn-large' href='/skiresorts/<%= skiresort._id %>/comments/new'>Post a comment</a>     
+            </div>
+               <hr>
+               <% skiresort.comments.forEach(function(comment){ %>
+                  <div class='row'>
+                     <div class='col-md-12'>
+                        <span class='pull-right'>10 Days Ago</span>
+                        <strong><%= comment.author %>:</strong>
+                        <p><%= comment.text %></p>
+                        <hr>
+                     </div>
+                  </div>
+
+               <% }); %>
+
+         </div>
       </div>
    </div>
-   
-   <div class='col-sm-12'>
-      <div class='content'>
-         <% skiresort.comments.forEach(function(comment){ %>
-            <p><strong><%= comment.author %>:</strong> <%= comment.text %></p>
-         <% }); %>
-      </div>
-   </div>
-   
-   
-   <a href='/skiresorts'>Go Back</a> 
 </div>
+
+<div class='container'>
+   <div class='text-center'>
+      <a href='/skiresorts'>Go Back</a>       
+   </div>
+</div>         
+
+
 
 <% include ../partials/footer %>
