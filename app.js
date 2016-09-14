@@ -9,7 +9,7 @@ var   SkiResort   = require('./models/skiresorts'),
       User        = require("./models/user");
 
 // Seed Database
-var SeedDB = require("./seeds");
+// var SeedDB = require("./seeds");
 // SeedDB();
 
 // Routing
