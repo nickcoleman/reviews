@@ -38,7 +38,18 @@
 # Style Ski Resort Show Page
    * Add sidebar
    * Reformat comments
-   * Add public directory
-   * Add custom stylesheet
+   * Add public directory (/public/stylesheets)
+   * Add custom stylesheet (main.css)
+
+# Add User Model
+    * Install packages needed for authentication
+    * Define User model
+    * Configure passport
+    * Add register routes
+    * Add register template
+    * TODO: Add password Reset
+    * TODO: Add forgot password
+
+
 
    

@@ -14,7 +14,7 @@ var   SkiResort   = require('./models/skiresorts'),
 // var SeedDB = require("./seeds");
 // SeedDB();
 
-// Routing
+// Routing -- Restful
 
 
 // Setup
@@ -23,6 +23,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 // app.use(express.static('./public'));
+
+// Passport Configuration
+app.use(require("express-session")({
+   secret: "On-Time, On-Target",
+   resave: false,
+   saveUninitialized: false,
+   cookie: { secure: true }  // Should we use this
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // ======== ROUTES =============   
 app.get("/", function(req, res){
@@ -136,8 +149,29 @@ app.post('/skiresorts/:id/comments', function(req, res){
 });
    
    
-   
+// ============================================
+// ======= Authentication Routes ==============
+// ============================================   
 
+// Show Account Register Form
+app.get("/register", function(req, res){
+   res.render("register");
+});
+
+// Create Create Account
+app.post("/register", function(req, res){
+   var newUser = new User({username: req.body.username});
+   var password = req.body.password;
+   User.register(newUser, password, function(err, user){
+      if (err) {
+         console.error("Error: " + err);
+         return res.render("register");
+      }
+      passport.authenticate("local")(req, res, function(){
+         res.redirect("/skiresorts");
+      });
+   });
+});
 
 // ===== Server Setup ==============
 app.listen(process.env.PORT, process.env.IP, function(){
