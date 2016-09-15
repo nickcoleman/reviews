@@ -153,12 +153,12 @@ app.post('/skiresorts/:id/comments', function(req, res){
 // ======= Authentication Routes ==============
 // ============================================   
 
-// Show Account Register Form
+// New User Account - Show Account Register Form
 app.get("/register", function(req, res){
    res.render("register");
 });
 
-// Create Create Account
+// Create User Account
 app.post("/register", function(req, res){
    var newUser = new User({username: req.body.username});
    var password = req.body.password;
@@ -173,7 +173,41 @@ app.post("/register", function(req, res){
    });
 });
 
-// ===== Server Setup ==============
+// Show User Login Form
+app.get("/login", function(req, res){
+   res.render("login");
+});
+
+// Handle Login Logic
+// Run passport.authenticate as middleware because we can presume the
+// user already exists.
+app.post("/login", passport.authenticate("local",
+   {
+      successRedirect: "/",
+      failureRedirect: "/login"
+   }
+));
+
+// Logout
+app.get("/logout", function(req, res){
+   req.logout();  // provided by passport packages
+   res.redirect('/');
+});
+
+// ----- User Account Management -------
+
+// Edit User
+
+
+// Update User
+
+
+// Delete User
+
+
+// ============================================   
+// ============= Server Setup =================
+// ============================================   
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log('Reviews Server started');
 });

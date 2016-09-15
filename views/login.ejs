@@ -1,13 +1,14 @@
 <% include ./partials/header %>
 <div class="container">
-   <h1>Account Sign Up</h1>
+   <h1>Account Login</h1>
    
-   <p>Please sign-up for your account</p>
-   <form action="/register" method="POST">
+   <p>Please enter your login information:</p>
+   <form action="/login" method="POST">
       <input type="text" name="username" placeholder="Enter username">
       <input type="password" name="password" placeholder="Enter password">
-      <button class="btn btn-info btn-large" type="submit">Create Account</button>
-   </form>   
+      <button class="btn btn-info btn-large" type="submit">Login</button>
+   </form>
+   <a href="">Forgot Password</a>
 </div>
 
 <% include ./partials/footer %>
