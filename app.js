@@ -28,8 +28,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(require("express-session")({
    secret: "On-Time, On-Target",
    resave: false,
-   saveUninitialized: false,
-   cookie: { secure: true }  // Should we use this
+   saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -60,7 +59,7 @@ app.get('/skiresorts', function(req, res){
 });
 
 // New Ski Resort
-app.get('/skiresorts/new', function(req, res){
+app.get('/skiresorts/new', isLoggedIn, function(req, res){
    res.render('skiresorts/new');
 });
 
@@ -116,7 +115,7 @@ app.delete('skiresorts/:id', function(req, res){
 // ========== Comment Routes ==================
 // ============================================
 
-app.get('/skiresorts/:id/comments/new', function(req, res){
+app.get('/skiresorts/:id/comments/new', isLoggedIn, function(req, res){
    SkiResort.findById(req.params.id, function(err, skiresort){
       if (err) {
          console.log(err);
@@ -148,10 +147,10 @@ app.post('/skiresorts/:id/comments', function(req, res){
    });
 });
    
-   
 // ============================================
-// ======= Authentication Routes ==============
+// ======= User Account Management ============
 // ============================================   
+  
 
 // New User Account - Show Account Register Form
 app.get("/register", function(req, res){
@@ -173,28 +172,6 @@ app.post("/register", function(req, res){
    });
 });
 
-// Show User Login Form
-app.get("/login", function(req, res){
-   res.render("login");
-});
-
-// Handle Login Logic
-// Run passport.authenticate as middleware because we can presume the
-// user already exists.
-app.post("/login", passport.authenticate("local",
-   {
-      successRedirect: "/",
-      failureRedirect: "/login"
-   }
-));
-
-// Logout
-app.get("/logout", function(req, res){
-   req.logout();  // provided by passport packages
-   res.redirect('/');
-});
-
-// ----- User Account Management -------
 
 // Edit User
 
@@ -204,6 +181,39 @@ app.get("/logout", function(req, res){
 
 // Delete User
 
+// ============================================
+// ======= Authentication Routes ==============
+// ============================================   
+
+// Show User Login Form
+app.get("/login", function(req, res){
+   res.render("login");
+});
+
+// Handle Login Logic
+// Run passport.authenticate as middleware because we can presume the
+// user already exists.  Also, don't need to use the function() callbac
+app.post("/login", passport.authenticate("local", 
+    {
+        successRedirect: "/skiresorts",
+        failureRedirect: "/login"
+    }), function(req, res){
+});
+
+
+// Logout
+app.get("/logout", function(req, res){
+   req.logout();  // provided by passport packages
+   res.redirect('/');
+});
+
+function isLoggedIn(req, res, next){
+   console.log(req.body.username);
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 // ============================================   
 // ============= Server Setup =================
