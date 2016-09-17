@@ -10,6 +10,14 @@ var   SkiResort   = require('./models/skiresorts'),
       Comment     = require('./models/comments'),
       User        = require("./models/user");
 
+// Routes
+var   indexRoutes    = require("./routes/index"),
+      categoryRoutes = require("./routes/category"),
+      commentRoutes  = require("./routes/comments"),
+      authRoutes     = require("./routes/auth"),
+      userRoutes     = require("./routes/users");
+      
+
 // Seed Database
 // var SeedDB = require("./seeds");
 // SeedDB();
@@ -42,185 +50,17 @@ app.use(function(req, res, next){
    next();
 });
 
-// ======== ROUTES =============   
-app.get("/", function(req, res){
-   // res.render("landing");
-   res.redirect('/skiresorts');
-});
+app.use(indexRoutes);
+app.use(categoryRoutes);
+app.use(commentRoutes);
+app.use(authRoutes);
+app.use(userRoutes);
 
-// ===============================================
-// ============ Ski Resort Routes ================
-// ===============================================
-
-// Index SkiResort
-app.get('/skiresorts', function(req, res){
    
-   SkiResort.find({}, function(err, skiresorts){
-      if (err) {
-         console.error(err);
-      } else {
-         res.render('skiresorts/index', {skiresorts: skiresorts});
-      }
-   });
-   
-});
-
-// New Ski Resort
-app.get('/skiresorts/new', isLoggedIn, function(req, res){
-   res.render('skiresorts/new');
-});
-
-// Create SkiResort
-app.post('/skiresorts', function(req, res){
-
-   var name = req.body.name;
-   var image = req.body.image;
-   var desc = req.body.description;
-   var newSkiresort = {name: name, image: image, description: desc};
-
-   SkiResort.create(newSkiresort, function(err, newSkiresort){
-      if (err) {
-         console.error(err);
-      } else {
-         res.redirect('/skiresorts');
-      }
-   });
-});
-
-  
-// Show SkiResort
-app.get('/skiresorts/:id', function(req, res){
-   var id = req.params.id;
-   SkiResort.findById(id).populate('comments').exec(function(err, foundSkiresort){
-      if (err) {
-         console.log(err);
-         return;
-      }
-      res.render('skiresorts/show', {skiresort: foundSkiresort});
-   });
-});
 
 
-// Edit SkiResort
-app.get('skiresorts/:id/edit', function(req, res){
-   res.send('Edit a specific Ski Resort');
-});
 
 
-// Update SkiResort
-app.put('skiresorts/:id', function(req, res){
-   res.send('Update a Specific Ski Resort');
-});
-
-
-// Destroy SkiResort
-app.delete('skiresorts/:id', function(req, res){
-   res.send('Delete a specific Ski Resort');
-});
-
-// ============================================
-// ========== Comment Routes ==================
-// ============================================
-
-app.get('/skiresorts/:id/comments/new', isLoggedIn, function(req, res){
-   SkiResort.findById(req.params.id, function(err, skiresort){
-      if (err) {
-         console.log(err);
-         return;
-      }
-      res.render('comments/new', {skiresort: skiresort});
-   });
-});
-
-app.post('/skiresorts/:id/comments', isLoggedIn, function(req, res){
-   var path = '/skiresorts/' + req.params.id;
-   SkiResort.findById(req.params.id, function(err, resort){
-      if(err) {
-         console.log(err);
-         res.redirect(path);
-      }
-      
-      Comment.create(req.body.comment, function(err, newComment){
-         if (err) {
-            console.log(err);
-            res.redirect(path);
-         }
-         
-         resort.comments.push(newComment);
-         resort.save();;
-         res.redirect(path);
-         
-      });
-   });
-});
-   
-// ============================================
-// ======= User Account Management ============
-// ============================================   
-  
-
-// New User Account - Show Account Register Form
-app.get("/register", function(req, res){
-   res.render("register");
-});
-
-// Create User Account
-app.post("/register", function(req, res){
-   var newUser = new User({username: req.body.username});
-   var password = req.body.password;
-   User.register(newUser, password, function(err, user){
-      if (err) {
-         console.error("Error: " + err);
-         return res.render("register");
-      }
-      passport.authenticate("local")(req, res, function(){
-         res.redirect("/skiresorts");
-      });
-   });
-});
-
-
-// Edit User
-
-
-// Update User
-
-
-// Delete User
-
-// ============================================
-// ======= Authentication Routes ==============
-// ============================================   
-
-// Show User Login Form
-app.get("/login", function(req, res){
-   res.render("login");
-});
-
-// Handle Login Logic
-// Run passport.authenticate as middleware because we can presume the
-// user already exists.  Also, don't need to use the function() callbac
-app.post("/login", passport.authenticate("local", 
-    {
-        successRedirect: "/skiresorts",
-        failureRedirect: "/login"
-    }), function(req, res){
-});
-
-
-// Logout
-app.get("/logout", function(req, res){
-   req.logout();  // provided by passport packages
-   res.redirect('/');
-});
-
-function isLoggedIn(req, res, next){
-   console.log(req.body.username);
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
 
 // ============================================   
 // ============= Server Setup =================

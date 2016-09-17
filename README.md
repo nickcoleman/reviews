@@ -57,7 +57,11 @@
 # Update Navbar
     * Add login/logout/sign-up links to navbar
     * Show/Hide authentication links
+    * Show Signed In As: <%= currentUser %>
+    * TODO: Add Profile page & link from above
 
-
+## Refactor Routes
+    * Reorganize routes with Express Router
+    
 
    
