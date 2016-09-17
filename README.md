@@ -44,11 +44,19 @@
 # Add User Model
     * Install packages needed for authentication
     * Define User model
+
+# Add Authentication
     * Configure passport
     * Add register routes
     * Add register template
+    * Add login routes
+    * Add login template
     * TODO: Add password Reset
     * TODO: Add forgot password
+
+# Update Navbar
+    * Add links to navbar
+    * Show/Hide authentication links
 
 
 
