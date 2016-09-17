@@ -36,6 +36,12 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Whatever is placed in res.locals is available to every page
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   next();
+});
+
 // ======== ROUTES =============   
 app.get("/", function(req, res){
    // res.render("landing");
@@ -48,6 +54,7 @@ app.get("/", function(req, res){
 
 // Index SkiResort
 app.get('/skiresorts', function(req, res){
+   
    SkiResort.find({}, function(err, skiresorts){
       if (err) {
          console.error(err);
@@ -125,7 +132,7 @@ app.get('/skiresorts/:id/comments/new', isLoggedIn, function(req, res){
    });
 });
 
-app.post('/skiresorts/:id/comments', function(req, res){
+app.post('/skiresorts/:id/comments', isLoggedIn, function(req, res){
    var path = '/skiresorts/' + req.params.id;
    SkiResort.findById(req.params.id, function(err, resort){
       if(err) {

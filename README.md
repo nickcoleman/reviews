@@ -55,7 +55,7 @@
     * TODO: Add forgot password
 
 # Update Navbar
-    * Add links to navbar
+    * Add login/logout/sign-up links to navbar
     * Show/Hide authentication links
 
 
