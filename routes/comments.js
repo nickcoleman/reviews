@@ -1,5 +1,6 @@
 var express = require("express"),
-    router  =  express.Router();
+      // mergeParams: true will merge both SkiResort & Comments
+    router  =  express.Router({mergeParams: true});
 
 var SkiResort = require("../models/skiresorts"),
       Comment = require("../models/comments");
@@ -8,7 +9,9 @@ var SkiResort = require("../models/skiresorts"),
 // ========== Comment Routes ==================
 // ============================================
 
-router.get('/skiresorts/:id/comments/new', isLoggedIn, function(req, res){
+// Routes start with: /skiresorts/:id/comments
+
+router.get('/new', isLoggedIn, function(req, res){
    SkiResort.findById(req.params.id, function(err, skiresort){
       if (err) {
          console.log(err);
@@ -18,7 +21,7 @@ router.get('/skiresorts/:id/comments/new', isLoggedIn, function(req, res){
    });
 });
 
-router.post('/skiresorts/:id/comments', isLoggedIn, function(req, res){
+router.post('/', isLoggedIn, function(req, res){
    var path = '/skiresorts/' + req.params.id;
    SkiResort.findById(req.params.id, function(err, resort){
       if(err) {
@@ -40,6 +43,9 @@ router.post('/skiresorts/:id/comments', isLoggedIn, function(req, res){
    });
 });
 
+// TODO: Edit Comment
+
+// TODO: Move to a middleware file
 function isLoggedIn(req, res, next){
    console.log(req.body.username);
     if(req.isAuthenticated()){

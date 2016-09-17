@@ -1,6 +1,8 @@
 // ============================================
 // ======= User Account Management ============
-// ============================================   
+// ============================================  
+
+// TODO: Need user profile page
   
 var   express = require("express"),
       router  =  express.Router();
@@ -30,13 +32,13 @@ router.post("/register", function(req, res){
 });
 
 
-// Edit User
+// TODO: Edit User
 
 
-// Update User
+// TODO: Update User
 
 
-// Delete User
+// TODO: Delete User
 
 
 module.exports = router;

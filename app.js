@@ -51,8 +51,8 @@ app.use(function(req, res, next){
 });
 
 app.use(indexRoutes);
-app.use(categoryRoutes);
-app.use(commentRoutes);
+app.use("/skiresorts", categoryRoutes);
+app.use("/skiresorts/:id/comments", commentRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
 
