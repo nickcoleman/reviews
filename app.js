@@ -7,7 +7,7 @@ var   express        = require("express"),
 
 // Models
 var   SkiResort   = require('./models/skiresorts'),
-      Comment     = require('./models/comments'),
+      Comment     = require('./models/comment'),
       User        = require("./models/user");
 
 // Routes
@@ -55,11 +55,6 @@ app.use("/skiresorts", categoryRoutes);
 app.use("/skiresorts/:id/comments", commentRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
-
-   
-
-
-
 
 
 // ============================================   

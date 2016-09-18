@@ -1,9 +1,8 @@
 var express = require("express"),
-      // mergeParams: true will merge both SkiResort & Comments
-    router  =  express.Router({mergeParams: true});
+    router  =  express.Router({mergeParams: true}); // mergeParams: true will merge both SkiResort & Comments
 
 var SkiResort = require("../models/skiresorts"),
-      Comment = require("../models/comments");
+      Comment = require("../models/comment");
 
 // ============================================
 // ========== Comment Routes ==================
@@ -21,22 +20,31 @@ router.get('/new', isLoggedIn, function(req, res){
    });
 });
 
+// Create a comment
+// 1st find the category then create the comment on it
 router.post('/', isLoggedIn, function(req, res){
-   var path = '/skiresorts/' + req.params.id;
-   SkiResort.findById(req.params.id, function(err, resort){
+   var path = '/skiresorts/' + req.params.id; // TODO: dynamically create path
+   SkiResort.findById(req.params.id, function(err, category){
       if(err) {
          console.log(err);
          res.redirect(path);
       }
       
-      Comment.create(req.body.comment, function(err, newComment){
+      Comment.create(req.body.comment, function(err, comment){
          if (err) {
             console.log(err);
             res.redirect(path);
          }
+         // add user name & id to the comment
+         // -- we know there is a user because of isLoggedIn
+         comment.author.id = req.user._id;
+         comment.author.username = req.user.username;
+         comment.save();
+         console.log("Comment: " + comment);
          
-         resort.comments.push(newComment);
-         resort.save();;
+         // save the comment to the category
+         category.comments.push(comment);
+         category.save();
          res.redirect(path);
          
       });

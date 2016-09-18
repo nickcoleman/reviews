@@ -46,6 +46,7 @@
 # Add User Model
     * Install packages needed for authentication
     * Define User model
+    * TODO: Automatically associate author with their comments
 
 # Add Authentication
     * Configure passport

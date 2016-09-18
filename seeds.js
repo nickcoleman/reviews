@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Skiresort = require('./models/skiresorts');
-var Comment = require("./models/comments");
+var Comment = require("./models/comment");
 
 var seedResort = [
    {
@@ -39,12 +39,14 @@ function SeedDB() {
       console.log('removed Comments');
    });
    
+   // Remove all skiresorts & repopulate
    Skiresort.remove({}, function(err){
       if(err) {
          console.log(err);
          return;
       } else {
          console.log("Removed Ski Resorts");
+         // Populate ski resorts
          seedResort.forEach(function(seed){
             Skiresort.create(seed, function(err, resort){
                if (err) {
@@ -53,15 +55,15 @@ function SeedDB() {
                }
                
                console.log('added Campground');
-               Comment.create(seedComment, function(err, comment){
-                  if (err) {
-                     console.log(err);
-                     return;
-                  }
-                  resort.comments.push(comment);
-                  resort.save();
-                  console.log('Comment created');
-               });
+               // Comment.create(seedComment, function(err, comment){
+               //    if (err) {
+               //       console.log(err);
+               //       return;
+               //    }
+               //    resort.comments.push(comment);
+               //    resort.save();
+               //    console.log('Comment created');
+               // });
                
             });
          });
