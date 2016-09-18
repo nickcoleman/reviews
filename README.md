@@ -34,7 +34,6 @@
    * Setup nested routes
    * Add comment new & create routes
    * Add new comment form
-   * TODO: Automatically assign username
    * TODO: convert Text box to Text Area
 
 # Style Ski Resort Show Page
@@ -63,8 +62,18 @@
     * Show Signed In As: <%= currentUser %>
     * TODO: Add Profile page & link from above
 
-## Refactor Routes
+# Refactor Routes
     * Reorganize routes with Express Router
     
+# Users + Comments
+   * Associate users and comments
+   * Automatically save author name to a comment
 
-   
+# Users + Categories (ski resorts)
+   * Prevent unauthenticated user from adding a campground
+   * Save username & id to newly created campground
+ 
+
+
+
+  

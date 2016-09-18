@@ -35,12 +35,17 @@ router.post('/', function(req, res){
    var name = req.body.name;
    var image = req.body.image;
    var desc = req.body.description;
-   var newSkiresort = {name: name, image: image, description: desc};
+   var author = {
+      id: req.user._id,
+      username: req.user.username
+   }
+   var newSkiresort = {name: name, image: image, description: desc, author: author};
 
    SkiResort.create(newSkiresort, function(err, newSkiresort){
       if (err) {
          console.error(err);
       } else {
+         console.log(newSkiresort);
          res.redirect('/skiresorts');
       }
    });
@@ -48,7 +53,7 @@ router.post('/', function(req, res){
 
   
 // Show SkiResort
-router.get('/:id', function(req, res){
+router.get('/:id', isLoggedIn, function(req, res){
    var id = req.params.id;
    SkiResort.findById(id).populate('comments').exec(function(err, foundSkiresort){
       if (err) {
@@ -61,19 +66,19 @@ router.get('/:id', function(req, res){
 
 
 // Edit SkiResort
-router.get('/:id/edit', function(req, res){
+router.get('/:id/edit', isLoggedIn, function(req, res){
    res.send('Edit a specific Ski Resort');
 });
 
 
 // Update SkiResort
-router.put('/:id', function(req, res){
+router.put('/:id', isLoggedIn, function(req, res){
    res.send('Update a Specific Ski Resort');
 });
 
 
 // Destroy SkiResort
-router.delete('/:id', function(req, res){
+router.delete('/:id', isLoggedIn, function(req, res){
    res.send('Delete a specific Ski Resort');
 });
 
