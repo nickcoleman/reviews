@@ -53,7 +53,7 @@ router.post('/', function(req, res){
 
   
 // Show SkiResort
-router.get('/:id', isLoggedIn, function(req, res){
+router.get('/:id', function(req, res){
    var id = req.params.id;
    SkiResort.findById(id).populate('comments').exec(function(err, foundSkiresort){
       if (err) {
@@ -67,13 +67,25 @@ router.get('/:id', isLoggedIn, function(req, res){
 
 // Edit SkiResort
 router.get('/:id/edit', isLoggedIn, function(req, res){
-   res.send('Edit a specific Ski Resort');
+   SkiResort.findById(req.params.id, function(err, type){
+      if(err) {
+         console.log(err);
+         return;
+      }
+      res.render("skiresorts/edit", {type: type});      
+   });
+
 });
 
 
 // Update SkiResort
-router.put('/:id', isLoggedIn, function(req, res){
-   res.send('Update a Specific Ski Resort');
+router.put('/:id', function(req, res){
+   SkiResort.findByIdAndUpdate(req.params.id, req.body.skiresort, function(err, updated){
+       if (err) {
+          console.log(err);
+       }
+       res.redirect("/skiresorts/" + req.params.id);
+    });
 });
 
 
