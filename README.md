@@ -1,6 +1,5 @@
 # reviews
 
-
 # Create landing page
 # Create skiresort page that lists each ski resort
 # skiresorts have:
@@ -11,7 +10,7 @@
    * Create header & footer partials
    * Link to Bootstrap
 
-# Create New Campground
+# Create New category
    * Set up new Ski Resort post route
    * Add body-parser
    * Add show Ski Resort form
@@ -19,7 +18,7 @@
 
 # Style Navbar & form
    * Add navbar to all pages
-   * Style new campground form
+   * Style new category form
 
 # Add Mongoose
    * Install and configure mongoose
@@ -70,10 +69,22 @@
    * Automatically save author name to a comment
 
 # Users + Categories (ski resorts)
-   * Prevent unauthenticated user from adding a campground
-   * Save username & id to newly created campground
+   * Prevent unauthenticated user from adding a category
+   * Save username & id to newly created category
  
 
+# Editing Categories
+   * Implement Method-Override
+   * Add Categories Edit route
+   * Add Link to Edit Page
+   * Add Update Router
+   * Fix $set problem
 
+# Deleting Categories
+   * Add Destroy Route
+   * Add Delete Button
 
-  
+# Authentication
+   * User can only edit their category entry
+   * User can only delete their category entry
+   * Hide/Show Edit/Delete buttons based on authentication

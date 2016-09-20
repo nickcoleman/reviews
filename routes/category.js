@@ -66,15 +66,23 @@ router.get('/:id', function(req, res){
 
 
 // Edit SkiResort
-router.get('/:id/edit', isLoggedIn, function(req, res){
-   SkiResort.findById(req.params.id, function(err, type){
-      if(err) {
-         console.log(err);
-         return;
-      }
-      res.render("skiresorts/edit", {type: type});      
-   });
+router.get('/:id/edit', function(req, res){
+   if (req.isAuthenticated()) {
+      SkiResort.findById(req.params.id, function(err, type){
+         if (err) {
+            console.log(err);
+            return;
+         }
 
+         // type.author.id is an object ... so, need to use
+         //  mongoose provided method equals to compare it to user.id
+         if (type.author.id.equals(req.user.id)) {
+            res.render("skiresorts/edit", {type: type});
+         }
+      })
+   } else {
+      res.send("<strong>You aren't authorized to edit that.  Login and try again</strong>");
+   }
 });
 
 
@@ -91,7 +99,12 @@ router.put('/:id', function(req, res){
 
 // Destroy SkiResort
 router.delete('/:id', isLoggedIn, function(req, res){
-   res.send('Delete a specific Ski Resort');
+   SkiResort.findByIdAndRemove(req.params.id, function(err){
+      if (err) {
+         console.log(err);
+      }
+      res.redirect("/skiresorts");
+   })
 });
 
 
