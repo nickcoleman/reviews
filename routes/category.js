@@ -66,23 +66,14 @@ router.get('/:id', function(req, res){
 
 
 // Edit SkiResort
-router.get('/:id/edit', function(req, res){
-   if (req.isAuthenticated()) {
-      SkiResort.findById(req.params.id, function(err, type){
-         if (err) {
-            console.log(err);
-            return;
-         }
+router.get('/:id/edit', checkCategoryOwnership, function(req, res){
 
-         // type.author.id is an object ... so, need to use
-         //  mongoose provided method equals to compare it to user.id
-         if (type.author.id.equals(req.user.id)) {
-            res.render("skiresorts/edit", {type: type});
-         }
-      })
-   } else {
-      res.send("<strong>You aren't authorized to edit that.  Login and try again</strong>");
-   }
+   SkiResort.findById(req.params.id, function(err, type){
+      if (err) {
+         res.redirect("back");
+      }
+      res.render("skiresorts/edit", {type: type});
+   });
 });
 
 
@@ -98,15 +89,37 @@ router.put('/:id', function(req, res){
 
 
 // Destroy SkiResort
-router.delete('/:id', isLoggedIn, function(req, res){
+router.delete('/:id', checkCategoryOwnership, function(req, res){
    SkiResort.findByIdAndRemove(req.params.id, function(err){
       if (err) {
-         console.log(err);
+         res.redirect("back");
       }
       res.redirect("/skiresorts");
-   })
+   });
 });
 
+function checkCategoryOwnership(req, res, next){
+   if (req.isAuthenticated()) {
+      SkiResort.findById(req.params.id, function(err, type){
+         if (err) {
+            res.redirect("back");
+         }
+         // type.author.id is an object ... so, need to use
+         //  mongoose provided method equals to compare it to user.id
+         if (type.author.id.equals(req.user.id)) {
+            next();
+         } else {
+            // TODO: Send to category page with alert saying not authorized.
+            var msg = "You are not authorized to edit this page";
+            res.redirect("back");
+         }
+      })
+   } else {
+      // TODO: Send to home page with alert msg
+      var msg = "You aren't authorized to edit that.  Login and try again."
+      res.redirect("back");  // returns user to previous page
+   }
+}
 
 function isLoggedIn(req, res, next){
    console.log(req.body.username);
