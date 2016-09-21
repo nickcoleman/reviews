@@ -78,7 +78,7 @@ router.get('/:id/edit', checkCategoryOwnership, function(req, res){
 
 
 // Update SkiResort
-router.put('/:id', function(req, res){
+router.put('/:id', checkCategoryOwnership, function(req, res){
    SkiResort.findByIdAndUpdate(req.params.id, req.body.skiresort, function(err, updated){
        if (err) {
           console.log(err);

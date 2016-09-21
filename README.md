@@ -84,7 +84,25 @@
    * Add Destroy Route
    * Add Delete Button
 
-# Authentication
+# User Authorization - Categories
    * User can only edit their category entry
    * User can only delete their category entry
-   * Hide/Show Edit/Delete buttons based on authentication
+   * Hide/Show Edit/Delete buttons based on authorization
+   * TODO: Authorization Roles (e.g. User, Editor, Admin, SuperAdmin)
+
+# Editing Comments
+   * Add Edit route
+   * Add Edit button
+   * Add Update route
+
+# Deleting Comments
+   * Add Destroy Route
+   * Add Delete Button
+
+# User Authorization - Comments
+   * User can only edit their comments
+   * User can only delete their comments
+   * Hide/Show Edit/Delete buttons based on authorization
+   * Refactor Middleware
+
+
