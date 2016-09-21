@@ -8,7 +8,7 @@ var SkiResort = require("../models/skiresorts"),
 // ========== Comment Routes ==================
 // ============================================
 
-// Routes start with: /skiresorts/:id/comments
+// Routes appended with: /skiresorts/:id/comments
 
 router.get('/new', isLoggedIn, function(req, res){
    SkiResort.findById(req.params.id, function(err, skiresort){
@@ -20,7 +20,7 @@ router.get('/new', isLoggedIn, function(req, res){
    });
 });
 
-// Create a comment
+// CREAT comment
 // 1st find the category then create the comment on it
 router.post('/', isLoggedIn, function(req, res){
    var path = '/skiresorts/' + req.params.id; // TODO: dynamically create path
@@ -51,7 +51,28 @@ router.post('/', isLoggedIn, function(req, res){
    });
 });
 
-// TODO: Edit Comment
+// EDIT Comment
+router.get("/:comment_id/edit", function(req, res){
+   Comment.findById(req.params.comment_id, function(err, comment){
+      if(err) {
+         console.err('Edit Comment Error: ' + err);
+         res.redirect('back');
+      } else {
+         res.render('comments/edit', {category_id: req.params.id, comment: comment});
+      }
+   });
+});
+
+// UPDATE Comment
+router.put('/:comment_id', function(req, res){
+   // res.send('Update Comment');
+   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, comment){
+      if (err) res.redirect('back');
+      else res.redirect('/skiresorts/' + req.params.id);
+   });
+});
+
+// TODO: DESTROY Comment
 
 // TODO: Move to a middleware file
 function isLoggedIn(req, res, next){

@@ -18,14 +18,16 @@
                <h4><a href=''><%= skiresort.name %></a></h4> 
                <p><%= skiresort.description %></p>
                <p class='author'>Submitted by: <%= skiresort.author.username %></p>
+               <!--Check if there is a user logged in ... if true check they are the author-->
                <% if (currentUser && skiresort.author.id.equals(currentUser._id)) { %>
-                  <a href="/skiresorts/<%= skiresort._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+                  <a href="/skiresorts/<%= skiresort._id %>/edit" class="btn btn-warning btn-md"><span class="glyphicon glyphicon-pencil"></a>
                   <form id="delete-form" action="/skiresorts/<%= skiresort._id %>?_method=DELETE" method="POST" >
-                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                     <button class="btn btn-danger btn-md" type="submit"><span class="glyphicon glyphicon-remove"></button>
                   </form>
                <% } %>
            </div>
          </div>
+         <!--========== COMMENTS ============-->
          <div class='well'>
             <div class='text-right'>
                <a class='btn btn-info btn-large' href='/skiresorts/<%= skiresort._id %>/comments/new'>Post a comment</a>     
@@ -37,6 +39,10 @@
                         <span class='pull-right'>10 Days Ago</span>
                         <strong><%= comment.author.username %>:</strong>
                         <p><%= comment.text %></p>
+                        <a class="btn btn-warning btn-sm" 
+                           href="/skiresorts/<%= skiresort._id %>/comments/<%= comment._id %>/edit">
+                           <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
                         <hr>
                      </div>
                   </div>
