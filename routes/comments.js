@@ -73,10 +73,15 @@ router.put('/:comment_id', function(req, res){
 });
 
 // TODO: DESTROY Comment
+router.delete("/:comment_id", function(req, res){
+   Comment.findByIdAndRemove(req.params.comment_id, function(err){
+      if (err) res.redirect('back');
+      else res.redirect('/skiresorts/' + req.params.id);
+   })
+});
 
 // TODO: Move to a middleware file
 function isLoggedIn(req, res, next){
-   console.log(req.body.username);
     if(req.isAuthenticated()){
         return next();
     }

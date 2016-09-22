@@ -22,7 +22,9 @@
                <% if (currentUser && skiresort.author.id.equals(currentUser._id)) { %>
                   <a href="/skiresorts/<%= skiresort._id %>/edit" class="btn btn-warning btn-md"><span class="glyphicon glyphicon-pencil"></a>
                   <form id="delete-form" action="/skiresorts/<%= skiresort._id %>?_method=DELETE" method="POST" >
-                     <button class="btn btn-danger btn-md" type="submit"><span class="glyphicon glyphicon-remove"></button>
+                     <button class="btn btn-danger btn-md" type="submit">
+                        <span class="glyphicon glyphicon-remove">
+                     </button>
                   </form>
                <% } %>
            </div>
@@ -43,6 +45,11 @@
                            href="/skiresorts/<%= skiresort._id %>/comments/<%= comment._id %>/edit">
                            <span class="glyphicon glyphicon-pencil"></span>
                         </a>
+                        <form id="delete-form" action="/skiresorts/<%= skiresort._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                           <button class="btn btn-danger btn-sm" type="submit">
+                              <span class="glyphicon glyphicon-remove"></span>
+                           </button>
+                        </form>
                         <hr>
                      </div>
                   </div>
